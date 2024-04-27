@@ -5,6 +5,8 @@ const bodyParse = require('body-parser');
 
 const app=express();
 
+app.set("view engine","ejs");
+
 
 app.get("/", function (req, res) {
 
@@ -14,16 +16,20 @@ app.get("/", function (req, res) {
 
 if (currentDay === 6 || currentDay === 0){
 
-res.send("BOOOOOOOO!! Today is Weekend")
-
-}else {
-  res.send("O O Today is WeekDay")
-  
-
+day = "Weekend";
+}else if (currentDay === 1){
+  day = "Monday";
+}else if (currentDay === 2){
+  day = "Tuesday";
+}else if (currentDay === 3){
+  day = "Wednesday";
+}else if (currentDay === 4){
+  day = "Thursday";
+}else if (currentDay === 5){
+  day = "Friday";
 }
 
-
-
+res.render("list", {kindOfDay: day});
 
 
 
