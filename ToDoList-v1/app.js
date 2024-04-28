@@ -5,16 +5,16 @@ const bodyParse = require('body-parser');
 
 const app=express();
 
-var items =[];
+let items =[];
 
 app.set("view engine","ejs");
 
 
 app.use(bodyParse.urlencoded({extended:true}));
-
+app.use(express.static("public"));
 
 app.post("/",function(req,res){
-var newTaskItem = req.body.newItem;
+let newTaskItem = req.body.newItem;
 
 if (newTaskItem.trim() !== ''){
   items.push(newTaskItem);
@@ -31,15 +31,15 @@ res.redirect("/");
 
 app.get("/", function (req, res) {
 
-  var today = new Date();
+  let today = new Date();
 
-  var  options={
+  let  options={
   weekday:"long",
   day:"numeric",
   month:"long"
   }
 
-  var day = today.toLocaleDateString("en-us",options);
+  let day = today.toLocaleDateString("en-us",options);
 
   res.render("list", {kindOfDay: day , newTaskItems : items});
 

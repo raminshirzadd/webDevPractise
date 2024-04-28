@@ -3,23 +3,37 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="/css/styles.css">
   </head>
   <body>
 
+<div class="box" id="heading">
 <h1> <%= kindOfDay %> </h1>
+</div>
+<div class="box" id="item">
 
-<ul>
+    <% for (let i = 0 ; i < newTaskItems.length; i++) { %>
+        <div class="item">
+          <input type="checkbox">
+        <p><%= newTaskItems[i] %></p>
+        </div>
+      <% } %>
 
-  <% for (var i = 0 ; i < newTaskItems.length; i++) { %>
-      <li><%= newTaskItems[i] %></li>
-    <% } %>
+      <form class="item" action="/" method="post">
+        <input type="text" name="newItem" placeholder="Write New Task" autocomplete="off">
+        <button type="submit" name="addBtn"> + </button>
+      </form>
+  </div>
 
-</ul>
 
-<form action="/" method="post">
-  <input type="text" name="newItem" placeholder="Write New Task">
-  <button type="submit" name="addBtn">Add</button>
-</form>
+
+
+
+
+
+
+
+
 
   </body>
 </html>
