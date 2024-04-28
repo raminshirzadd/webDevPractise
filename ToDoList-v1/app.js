@@ -5,45 +5,43 @@ const bodyParse = require('body-parser');
 
 const app=express();
 
+var items =[];
+
 app.set("view engine","ejs");
 
+
+app.use(bodyParse.urlencoded({extended:true}));
+
+
+app.post("/",function(req,res){
+var newTaskItem = req.body.newItem;
+
+if (newTaskItem.trim() !== ''){
+  items.push(newTaskItem);
+}
+else {
+  console.log("Error: New item list empty.")
+}
+res.redirect("/");
+
+
+
+
+})
 
 app.get("/", function (req, res) {
 
   var today = new Date();
-  var currentDay = today.getDay();
 
+  var  options={
+  weekday:"long",
+  day:"numeric",
+  month:"long"
+  }
 
-switch (currentDay){
-case 0:
-day = "Sunday";
-break;
-case 1:
-day = "Monday";
-break;
-case 2:
-day = "Tuseday";
-break;
-case 3:
-day = "Wednesday";
-break;
-case 4:
-day = "Thursday";
-break;
-case 5:
-day = "Friday";
-break;
-case 6:
-day = "Saturday";
-break;
+  var day = today.toLocaleDateString("en-us",options);
 
-default:
-console.log("error: current day is equal to:" + currentDay);
-
-
-}
-res.render("list", {kindOfDay: day});
-
+  res.render("list", {kindOfDay: day , newTaskItems : items});
 
 
 })
