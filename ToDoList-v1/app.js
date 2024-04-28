@@ -14,21 +14,34 @@ app.get("/", function (req, res) {
   var currentDay = today.getDay();
 
 
-if (currentDay === 6 || currentDay === 0){
+switch (currentDay){
+case 0:
+day = "Sunday";
+break;
+case 1:
+day = "Monday";
+break;
+case 2:
+day = "Tuseday";
+break;
+case 3:
+day = "Wednesday";
+break;
+case 4:
+day = "Thursday";
+break;
+case 5:
+day = "Friday";
+break;
+case 6:
+day = "Saturday";
+break;
 
-day = "Weekend";
-}else if (currentDay === 1){
-  day = "Monday";
-}else if (currentDay === 2){
-  day = "Tuesday";
-}else if (currentDay === 3){
-  day = "Wednesday";
-}else if (currentDay === 4){
-  day = "Thursday";
-}else if (currentDay === 5){
-  day = "Friday";
+default:
+console.log("error: current day is equal to:" + currentDay);
+
+
 }
-
 res.render("list", {kindOfDay: day});
 
 
